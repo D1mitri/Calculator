@@ -1,0 +1,29 @@
+set name :="solution for naumen"
+set scalaVersion :="2.11.6"
+set version :="1.0"
+session save
+exit
+compile
+run
+compile
+run
+compile
+run
+compile
+run
+compile
+run
+compile
+run
+compile
+run
+compile
+run
+compile
+run
+compile
+12+45.0-0.34
+compile
+run
+compile
+run
