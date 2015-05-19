@@ -8,7 +8,7 @@ import scala.math._
 object Solution extends App with Calculator {
   
   println("Please, enter your expression")
-  val str = "1+2*3/4.4-2^3" //StdIn.readLine() //"12+45.0-0.34"
+  val str = StdIn.readLine() //"12+45.0-0.34", "1+2*3/4.4-2^3"
   println("Expression: " + str)
   try {
     println("Result = " + compute(str))

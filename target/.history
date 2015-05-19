@@ -38,3 +38,5 @@ sbt upload
 test
 sbt update
 update
+compile
+run
