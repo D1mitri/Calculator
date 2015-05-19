@@ -3,11 +3,12 @@ package calculator
 import scala.collection.mutable.ArrayBuffer
 import scala.math.BigDecimal
 import scala.io.StdIn
+import scala.math._
 
 object Solution extends App with Calculator {
   
   println("Please, enter your expression")
-  val str = StdIn.readLine() //"12+45.0-0.34"
+  val str = "1+2*3/4.4-2^3" //StdIn.readLine() //"12+45.0-0.34"
   println("Expression: " + str)
   try {
     println("Result = " + compute(str))
@@ -51,6 +52,9 @@ object Solution extends App with Calculator {
     ch match {
       case '+' => arr += l + r
       case '-' => arr += l - r
+	  case '*' => arr += l * r
+	  case '/' => arr += l / r
+	  case '^' => arr += pow(l.toDouble, r.toDouble)
     }
   }
 
@@ -63,12 +67,14 @@ object Solution extends App with Calculator {
   }
 
   def isOperator(ch: Char): Boolean = {
-    ch == '+' || ch == '-'
+    ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^'
   }
 
   def priority(ch: Char): Int = {
     ch match {
       case '+' | '-' => 1
+	  case '*' | '/' => 2
+	  case '^' => 3
       case _ => -1
     }
   }

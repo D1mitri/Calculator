@@ -1,0 +1,34 @@
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mInitial source changes: [0m
+[0m[[0mdebug[0m] [0m	removed:Set()[0m
+[0m[[0mdebug[0m] [0m	added: Set(D:\MyProject\src\test\scala\SolutionTest.scala)[0m
+[0m[[0mdebug[0m] [0m	modified: Set()[0m
+[0m[[0mdebug[0m] [0mRemoved products: Set()[0m
+[0m[[0mdebug[0m] [0mExternal API changes: API Changes: Set()[0m
+[0m[[0mdebug[0m] [0mModified binary dependencies: Set()[0m
+[0m[[0mdebug[0m] [0mInitial directly invalidated sources: Set(D:\MyProject\src\test\scala\SolutionTest.scala)[0m
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mSources indirectly invalidated by:[0m
+[0m[[0mdebug[0m] [0m	product: Set()[0m
+[0m[[0mdebug[0m] [0m	binary dep: Set()[0m
+[0m[[0mdebug[0m] [0m	external source: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(D:\MyProject\src\test\scala\SolutionTest.scala)[0m
+[0m[[0mdebug[0m] [0mRecompiling all 1 sources: invalidated sources (1) exceeded 50.0% of all sources[0m
+[0m[[0minfo[0m] [0mCompiling 1 Scala source to D:\MyProject\target\scala-2.11\test-classes...[0m
+[0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.11.6[0m
+[0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.11.6[0m
+[0m[[0mdebug[0m] [0mRunning cached compiler 664a5434, interfacing (CompilerInterface) with Scala compiler version 2.11.6[0m
+[0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
+[0m[[0mdebug[0m] [0m	-bootclasspath[0m
+[0m[[0mdebug[0m] [0m	C:\Program Files\Java\jdk1.8.0_25\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_25\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_25\jre\classes;C:\Users\Dmitry\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.11.6.jar[0m
+[0m[[0mdebug[0m] [0m	-classpath[0m
+[0m[[0mdebug[0m] [0m	D:\MyProject\target\scala-2.11\test-classes;D:\MyProject\target\scala-2.11\classes[0m
+[0m[[31merror[0m] [0mD:\MyProject\src\test\scala\SolutionTest.scala:1: object scalatest is not a member of package org[0m
+[0m[[31merror[0m] [0mimport org.scalatest.FlatSpec[0m
+[0m[[31merror[0m] [0m           ^[0m
+[0m[[31merror[0m] [0mD:\MyProject\src\test\scala\SolutionTest.scala:3: not found: type FlatSpec[0m
+[0m[[31merror[0m] [0mclass FirstSpec extends FlatSpec {[0m
+[0m[[31merror[0m] [0m                        ^[0m
+[0m[[31merror[0m] [0mtwo errors found[0m
+[0m[[0mdebug[0m] [0mCompilation failed (CompilerInterface)[0m
+[0m[[31merror[0m] [0m(test:[31mcompileIncremental[0m) Compilation failed[0m
