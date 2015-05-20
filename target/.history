@@ -40,3 +40,7 @@ sbt update
 update
 compile
 run
+compile
+run
+compile
+run

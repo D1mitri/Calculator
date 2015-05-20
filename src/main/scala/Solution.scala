@@ -23,20 +23,30 @@ object Solution extends App with Calculator {
 
     var i = 0
     while (i < input.length()) {
-      var c = input(i)
-      if (isOperator(c)) {
+      var c = input(i)	  
+	  if (c =='(')
+	    op += c
+	  else if (c == ')') {
+	  while (op.last != '(')
+        processOperator(num, removeLastChar(op));
+        removeLastChar(op)
+      }	  
+      else if (isOperator(c)) {
         while (!op.isEmpty && priority(op.last) >= priority(c))
           processOperator(num, removeLastChar(op))
         op += c
       }
+	  else if (isFactorial(c)) {
+	    num += factorial(removeLastBigDecimal(num).toInt).toDouble
+	  }
       else {
         var operand = ""
         while (i < input.length() && (input(i).isDigit || isDot(input(i)))) {
           operand += input(i)
           i += 1
         }
-        i -= 1
-        num += operand.toDouble
+		i -= 1
+		num += operand.toDouble
       }
       i += 1
     }
@@ -68,6 +78,16 @@ object Solution extends App with Calculator {
 
   def isOperator(ch: Char): Boolean = {
     ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^'
+  }
+  
+  def isFactorial(ch: Char) : Boolean = {
+    ch == '!'
+  }
+  
+  def factorial(n: Int) : Int = {
+    var res = 1
+	for(x <- 1 until n+1) res *= x
+	res
   }
 
   def priority(ch: Char): Int = {
