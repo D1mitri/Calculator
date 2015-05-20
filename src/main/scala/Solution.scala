@@ -8,7 +8,7 @@ import scala.math._
 object Solution extends App with Calculator {
   
   println("Please, enter your expression")
-  val str = StdIn.readLine() //"12+45.0-0.34", "1+2*3/4.4-2^3"
+  val str = StdIn.readLine() //"12+45.0-0.34", "1+2*3/4.4-2^3" , "-(23+1/4)*2!+sin(cos(1+2^4))"
   println("Expression: " + str)
   try {
     println("Result = " + compute(str))
@@ -20,6 +20,7 @@ object Solution extends App with Calculator {
   override def compute(input: String): BigDecimal = {
     val num = ArrayBuffer[BigDecimal]()
     val op = ArrayBuffer[Char]()
+	val func = ArrayBuffer[Char]()
 
     var i = 0
     while (i < input.length()) {
@@ -29,6 +30,8 @@ object Solution extends App with Calculator {
 	  else if (c == ')') {
 	  while (op.last != '(')
         processOperator(num, removeLastChar(op));
+		if(func.length > 0)
+		  processFunction(num, removeLastChar(func))
         removeLastChar(op)
       }
 	  else if (isUnarniyMinus(c, i)) {
@@ -42,6 +45,10 @@ object Solution extends App with Calculator {
       }
 	  else if (isFactorial(c)) {
 	    num += factorial(removeLastBigDecimal(num).toInt).toDouble
+	  }
+	  else if (isFunction(c)) {
+	    func += c
+		i+=2
 	  }
       else {
         var operand = ""
@@ -60,8 +67,8 @@ object Solution extends App with Calculator {
   }
 
   def processOperator(arr: ArrayBuffer[BigDecimal], ch: Char): Unit = {
-    val r = removeLastBigDecimal(arr)
-    val l = removeLastBigDecimal(arr)
+	val r = removeLastBigDecimal(arr)
+	val l = removeLastBigDecimal(arr)
 
     ch match {
       case '+' => arr += l + r
@@ -69,6 +76,15 @@ object Solution extends App with Calculator {
 	  case '*' => arr += l * r
 	  case '/' => arr += l / r
 	  case '^' => arr += pow(l.toDouble, r.toDouble)
+    }
+  }
+  
+  def processFunction(arr: ArrayBuffer[BigDecimal], ch: Char): Unit = {
+    val r = removeLastBigDecimal(arr)
+	
+	ch match {
+	  case 's' => arr += sin((r.toDouble).toRadians)
+	  case 'c' => arr += cos((r.toDouble).toRadians)
     }
   }
 
@@ -92,6 +108,10 @@ object Solution extends App with Calculator {
     ch == '-' && i == 0
   }
   
+  def isFunction(ch: Char) : Boolean = {
+    ch == 's' || ch == 'c'
+  }
+  
   def factorial(n: Int) : Int = {
     var res = 1
 	for(x <- 1 until n+1) res *= x
@@ -100,7 +120,7 @@ object Solution extends App with Calculator {
 
   def priority(ch: Char): Int = {
     ch match {
-      case '+' | '-' => 1
+      case '+' | '-' | 's' | 'c' => 1
 	  case '*' | '/' => 2
 	  case '^' => 3
       case _ => -1
