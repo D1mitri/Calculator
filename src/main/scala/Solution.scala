@@ -30,7 +30,11 @@ object Solution extends App with Calculator {
 	  while (op.last != '(')
         processOperator(num, removeLastChar(op));
         removeLastChar(op)
-      }	  
+      }
+	  else if (isUnarniyMinus(c, i)) {
+	    num += -1
+		op += '*'
+	  }
       else if (isOperator(c)) {
         while (!op.isEmpty && priority(op.last) >= priority(c))
           processOperator(num, removeLastChar(op))
@@ -82,6 +86,10 @@ object Solution extends App with Calculator {
   
   def isFactorial(ch: Char) : Boolean = {
     ch == '!'
+  }
+  
+  def isUnarniyMinus(ch: Char, i: Int) : Boolean = {
+    ch == '-' && i == 0
   }
   
   def factorial(n: Int) : Int = {
