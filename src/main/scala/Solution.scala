@@ -1,20 +1,32 @@
 package calculator
 
 import scala.collection.mutable.ArrayBuffer
-import scala.math.BigDecimal
 import scala.io.StdIn
 import scala.math._
 
 object Solution extends App with Calculator {
   
-  println("Please, enter your expression")
-  val str = StdIn.readLine() //"12+45.0-0.34", "1+2*3/4.4-2^3" , "-(23+1/4)*2!+sin(cos(1+2^4))"
-  println("Expression: " + str)
-  try {
-    println("Result = " + compute(str))
-  }
-  catch {
-    case _: Throwable => println("Wrong input")
+  println("=========================================================================")
+  println("Hello to my Calculator (v.1.0)")
+  println("You can use operations (+,-,*,/,^), functions (sin and cos) and brackets.")
+  println("Press 'x' and press Enter to draw back from the program")
+  println("=========================================================================")
+  var str = ""
+  while(str != "x") {
+	println("Please, enter your expression")
+    str = StdIn.readLine() //"12+45.0-0.34", "1+2*3/4.4-2^3" , "-(23+1/4)*2!+sin(cos(1+2^4))"
+    try {
+	  if (str == "x")
+		println("Exit")
+	  else {
+		println("Expression: " + str)
+		println("Result = " + compute(str))
+	  }
+    }
+    catch {
+      case _: Throwable => println("Wrong input")
+    }
+  println("-------------------------------------------------------------------------")
   }
 
   override def compute(input: String): BigDecimal = {
@@ -25,8 +37,14 @@ object Solution extends App with Calculator {
     var i = 0
     while (i < input.length()) {
       var c = input(i)	  
-	  if (c =='(')
+	  if (c =='(') {		  
 	    op += c
+		if (input(i+1) == '-') {
+		  num += -1
+		  op += '*'
+		  i+=1
+		}
+	  }
 	  else if (c == ')') {
 	  while (op.last != '(')
         processOperator(num, removeLastChar(op));
@@ -120,7 +138,7 @@ object Solution extends App with Calculator {
 
   def priority(ch: Char): Int = {
     ch match {
-      case '+' | '-' | 's' | 'c' => 1
+      case '+' | '-' => 1
 	  case '*' | '/' => 2
 	  case '^' => 3
       case _ => -1
