@@ -3,6 +3,7 @@ package calculator
 import scala.collection.mutable.ArrayBuffer
 import scala.io.StdIn
 import scala.math._
+import util.control.Breaks._
 
 object Solution extends App with Calculator {
   
@@ -36,47 +37,52 @@ object Solution extends App with Calculator {
 
     var i = 0
     while (i < input.length()) {
-      var c = input(i)	  
-	  if (c =='(') {		  
-	    op += c
-		if (input(i+1) == '-') {
-		  num += -1
-		  op += '*'
-		  i+=1
-		}
-	  }
-	  else if (c == ')') {
-	  while (op.last != '(')
-        processOperator(num, removeLastChar(op));
-		if(func.length > 0)
-		  processFunction(num, removeLastChar(func))
-        removeLastChar(op)
-      }
-	  else if (isUnarniyMinus(c, i)) {
-	    num += -1
-		op += '*'
-	  }
-      else if (isOperator(c)) {
-        while (!op.isEmpty && priority(op.last) >= priority(c))
-          processOperator(num, removeLastChar(op))
-        op += c
-      }
-	  else if (isFactorial(c)) {
-	    num += factorial(removeLastBigDecimal(num).toInt).toDouble
-	  }
-	  else if (isFunction(c)) {
-	    func += c
-		i+=2
-	  }
-      else {
-        var operand = ""
-        while (i < input.length() && (input(i).isDigit || isDot(input(i)))) {
-          operand += input(i)
-          i += 1
+      var c = input(i)
+	  
+	  breakable {
+	    if (isDelim(c))
+		  break
+	    else if (c =='(') {
+	      op += c
+		  if (input(i+1) == '-') {
+		    num += -1
+		    op += '*'
+		    i+=1
+		  }
+	    }
+	    else if (c == ')') {
+	    while (op.last != '(')
+          processOperator(num, removeLastChar(op));
+		  if(func.length > 0)
+		    processFunction(num, removeLastChar(func))
+          removeLastChar(op)
         }
-		i -= 1
-		num += operand.toDouble
-      }
+	    else if (isUnarniyMinus(c, i)) {
+	      num += -1
+		  op += '*'
+	    }
+        else if (isOperator(c)) {
+          while (!op.isEmpty && priority(op.last) >= priority(c))
+            processOperator(num, removeLastChar(op))
+          op += c
+        }
+	    else if (isFactorial(c)) {
+	      num += factorial(removeLastBigDecimal(num).toInt).toDouble
+	    }
+	    else if (isFunction(c)) {
+	      func += c
+		  i+=2
+	    }
+        else {
+          var operand = ""
+          while (i < input.length() && (input(i).isDigit || isDot(input(i)))) {
+            operand += input(i)
+            i += 1
+          }
+		  i -= 1
+		  num += operand.toDouble
+        }
+	  }	  
       i += 1
     }
 	while(!op.isEmpty)
